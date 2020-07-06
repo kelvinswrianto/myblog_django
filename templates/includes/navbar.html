@@ -25,7 +25,7 @@
 </style>
 
 <nav class="navbar navbar-expand-md navbar-dark nav-bg fixed-top">
-    <a class="navbar-brand text-white" href="#" style="font-family: Georgia;">UPDAILYDOSE </a>
+    <a class="navbar-brand text-white" href="{% url 'blog-index' %}" style="font-family: Georgia;">UPDAILYDOSE </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
         aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -46,7 +46,7 @@
                 <a class="nav-link text-white" href="{% url 'user-register' %}">Register</a>
             </li>
             {% else %}
-            <form action="#" method="get">
+            <form action="{% url 'blog-search' %}" method="get">
                 <div class="input-group">
                     <input name="q" type="text" class="form-control" placeholder="What are you looking for ?">
                     <div class="input-group-append">
@@ -57,17 +57,17 @@
                   </div>
             </form>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">+ Create Post</a>
+                <a class="nav-link text-white" href="{% url 'blog-create' %}">+ Create Post</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">Profile</a>
+                <a class="nav-link text-white" href="{% url 'user-profile' %}">Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="{% url 'user-logout' %}">Logout</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link text-white align-items-center">
+                <a href="{% url 'user-profile' %}" class="nav-link text-white align-items-center">
                     @{{ user.username }}
                     <img src="{{user.profile.image.url}}" alt="" class="avatar ml-2">
                 </a>

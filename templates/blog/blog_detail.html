@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+{{ post.title }}
+{% endblock title %}
+
+
+{% block style %}
+<style>
+    .img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .cards {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .card {
+        margin: 5px;
+    }
+    .custom-p p{
+        margin: 0;
+    }
+    
+</style>
+{% endblock style %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-8">
+            <h1 class="mt-4">{{ post.title }}</h1>
+            <p class="lead">
+                <div class="d-flex flex-row align-items-center text-muted">
+                    <img src="{{ post.author.profile.image.url }}" alt="" class="avatar ml-2 mr-2" style="height: 30px; width: 30px;">
+                    @{{ post.author.username }}
+                    {% if update_permission %}
+                        <a href="{% url 'blog-update' pk=post.id %}" class="btn btn-info btn-sm ml-2">Update</a>
+                        <a href="{% url 'blog-delete' pk=post.id %}" class="btn btn-danger btn-sm ml-2">Delete</a>
+                    {% endif %}
+                </div>
+            </p>
+            
+            
+            <hr>
+            <p>{{ post.date_posted|date:"F d, Y" }}</p>
+
+            <hr>
+            
+            <div class="text-justify custom-p">{{ post.content|safe|linebreaks }}</div>
+            
+
+            
+            
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+            <!-- Search Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Search</h5>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Categories</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#">Web Design</a>
+                                </li>
+                                <li>
+                                    <a href="#">HTML</a>
+                                </li>
+                                <li>
+                                    <a href="#">Freebies</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#">JavaScript</a>
+                                </li>
+                                <li>
+                                    <a href="#">CSS</a>
+                                </li>
+                                <li>
+                                    <a href="#">Tutorials</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+This is blog index
+{% endblock title %}
+
+
+{% block style %}
+<style>
+    .img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .cards {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .card {
+        margin: 5px;
+    }
+</style>
+{% endblock style %}
+
+
+{% block content %}
+<div class="row justify-content-center align-items-center">
+    <div class="content">
+        <div class="content-section">
+            <form action="" method="post" style="width: 500px;">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Delete Post</legend>
+                    <h2>Are you sure you want to delete the post "{{ object.title }}"</h2>
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+                    <a class="btn btn-outline-info" href="{% url 'blog-detail' object.id %}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

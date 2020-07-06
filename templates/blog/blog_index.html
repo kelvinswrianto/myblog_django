@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+Home - UPDAILYDOSE
+{% endblock title %}
+
+
+{% block style %}
+<style>
+    .img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .cards {
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        width: 40%;
+    }
+</style>
+{% endblock style %}
+
+
+{% block content %}
+<div class="cards">
+    {% for post in posts %}
+    <div class="card mb-4">
+        <div class="card-body">
+            <a href="{% url 'blog-detail' pk=post.id %}">
+                <h4 class="text-dark">{{ post.title|truncatechars:100 }}</h4>
+            </a>
+            <div class="text-muted border-bottom pb-2">
+                <small class="d-flex flex-row align-items-center justify-content-between">
+                    <div class="d-flex flex-row align-items-center">
+                        <img src="{{ post.author.profile.image.url }}" alt="" class="avatar mr-2"
+                            style="height: 30px; width: 30px;">
+                        @{{ post.author.username }}
+                    </div>
+                    Posted on {{ post.date_posted|date:"F d, Y" }}
+
+                    <!-- <a href="#">{{ post.author }}</a> -->
+                </small>
+            </div>
+
+            <!-- <h2 class="card-title">{{ post.title }}</h2> -->
+            <p class="card-text font-weight-normal ">
+                {{ post.content|truncatewords:30|striptags|safe }}
+                <a href="{% url 'blog-detail' pk=post.id %}">
+                    <small>Read More</small>
+                </a>
+            </p>
+
+
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+<div class="pagination d-flex flex-row align-items-center justify-content-center">
+    {% if page_obj.has_previous %}
+    <a href="?page=1" class="btn btn-outline-primary mr-1">&laquo; first</a>
+    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary mr-1">previous</a>
+    {% if page_obj.number >= 3 %}
+    <li><a href="?page={{ page_obj.number|add:-2 }}" class="btn btn-outline-primary mr-1">{{ page_obj.number|add:-2 }}</a>
+    </li>
+    {% endif %}
+    <li><a href="?page={{ page_obj.number|add:-1 }}" class="btn btn-outline-primary mr-1">{{ page_obj.number|add:-1 }}</a>
+    </li>
+    {% endif %}
+    <div class="d-flex">
+        <li class="btn btn-outline-primary active mr-1"><span>{{ page_obj.number }} <span
+                    class="sr-only">(current)</span></span></li>
+    </div>
+
+    {% if page_obj.has_next %}
+    
+    <li><a href="?page={{ page_obj.number|add:1 }}" class="btn btn-outline-primary mr-1">{{ page_obj.number|add:1 }}</a>
+    </li>
+    {% if page_obj.number|add:2 < page_obj.page_range %}
+    <li><a href="?page={{ page_obj.number|add:2 }}" class="btn btn-outline-primary mr-1">{{ page_obj.number|add:2 }}</a>
+    </li>  
+    {% endif %}
+    
+    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary mr-1">next</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary mr-1">last &raquo;</a>
+    {% endif %}
+</div>
+
+{% endblock content %}

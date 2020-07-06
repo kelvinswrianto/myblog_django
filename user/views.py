@@ -20,7 +20,7 @@ def register_view(request):
     context = {
         'form' : form
     }
-    return render(request, 'user_register.html', context)
+    return render(request, 'user/user_register.html', context)
 
 @login_required
 def profile_view(request):
@@ -42,5 +42,5 @@ def profile_view(request):
         'u_form' : u_form,
         'p_form' : p_form
     }
-    return render(request, 'user_profile.html', context)
+    return render(request, 'user/user_profile.html', context)
 

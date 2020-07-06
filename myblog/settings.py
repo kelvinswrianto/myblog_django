@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # my apps
     'user.apps.UserConfig',
+    'blog.apps.BlogConfig',
 
     # third party app
     'django_cleanup.apps.CleanupConfig',
@@ -196,7 +197,7 @@ CKEDITOR_CONFIGS = {
         'tabSpaces': 4,
         'enterMode': 1,
         'autoParagraph': False,
-        'fillEmptyBlocks': False,
+        
     }
 }
 ###################################
