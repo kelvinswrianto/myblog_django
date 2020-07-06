@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+try:
+   from .local_settings import *
+except ImportError:
+    raise Exception("A local_settings.py file is required to run this project")
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '5du%uzc@jd1%xwl0nczwx#%$jqchfqqk27c1pd2f#mrvf6@)9b'
+SECRET_KEY = MY_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,11 +81,11 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myblog_db',
-        'USER': 'kelvinswr',
-        'PASSWORD': 'dbadminkelvinswr',
-        'HOST' : '127.0.0.1',
-        'PORT' : '5432'
+        'NAME': DB_NAME,
+        'USER': DB_USERNAME,
+        'PASSWORD': DB_PASSWORD,
+        'HOST' : DB_HOSTNAME,
+        'PORT' : DB_PORT
     }
 }
 
