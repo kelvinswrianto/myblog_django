@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Register - UPDAILYDOSE
+{% endblock title %}
+{% block content %}
+<div class="row justify-content-center align-items-center">
+    <div class="content">
+        <div class="content-section">
+
+            <form action="" method="post" style="width: 500px;">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Join Today</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Already Have An Account ? <a href="{% url 'user-login' %}" class="ml-2">Sign In</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

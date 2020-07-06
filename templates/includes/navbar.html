@@ -1,0 +1,84 @@
+
+<style>
+    .avatar {
+        vertical-align: middle;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        opacity: 100%;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-bg {
+        background-color: black;
+    }
+
+    .text-white {
+        opacity: 80%;
+    }
+
+    
+</style>
+
+<nav class="navbar navbar-expand-md navbar-dark nav-bg fixed-top">
+    <a class="navbar-brand text-white" href="#" style="font-family: Georgia;">UPDAILYDOSE </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse " id="navbarsExampleDefault">
+        <!-- <form class="form-inline my-2 my-lg-0 ml-auto">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+
+        <ul class="navbar-nav ml-auto align-items-center">
+            {% if not user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'user-login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'user-register' %}">Register</a>
+            </li>
+            {% else %}
+            <form action="{% url 'blog-search' %}" method="get">
+                <div class="input-group">
+                    <input name="q" type="text" class="form-control" placeholder="What are you looking for ?">
+                    <div class="input-group-append">
+                      <button class="btn btn-secondary" type="submit">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+            </form>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'blog-create' %}">+ Create Post</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'user-logout' %}">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text-white align-items-center">
+                    @{{ user.username }}
+                    <img src="#" alt="" class="avatar ml-2">
+                </a>
+            </li>
+            
+            {% endif %}
+
+        </ul>
+        
+    </div>
+    
+</nav>
+
+<div style="height: 60px;"></div>
