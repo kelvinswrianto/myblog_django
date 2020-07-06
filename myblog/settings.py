@@ -150,7 +150,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL = 'blog-index'
+LOGIN_REDIRECT_URL = 'user-profile'
 LOGOUT_REDIRECT_URL = 'user-login'
 
 LOGIN_URL = 'user-login'
